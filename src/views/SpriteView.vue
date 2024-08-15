@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" @mousemove="updateCursorPosition" @click="handleMouseClick">
     <!-- Background container -->
     <div class="background"></div>
 
@@ -9,8 +9,13 @@
       :frameHeight="24"
       :animationSpeed="100"
       :spriteSheet="spriteSheetPath"
-      :scale="2"
+      :bowSpriteSheet="bowSpriteSheetPath"
+      :arrowImage="arrowImagePath"
+      :scale="1.5"
       :obstacles="obstacles"
+      :mouseX="mouseX"
+      :mouseY="mouseY"
+      :shoot="shoot"
     />
     <div
       v-for="(obstacle, index) in obstacles"
@@ -24,6 +29,8 @@
 <script>
 import SpriteAnimator from '@/components/SpriteAnimator.vue'
 import spriteSheetPath from '@/assets/Character/Girl-Sheet.png'
+import bowSpriteSheetPath from '@/assets/Character/Bow.png'
+import arrowImagePath from '@/assets/Character/Arrow.png'
 
 export default {
   name: 'App',
@@ -33,11 +40,16 @@ export default {
   data() {
     return {
       spriteSheetPath,
+      bowSpriteSheetPath,
+      arrowImagePath,
       obstacles: [
         { x: 100, y: 100, width: 50, height: 50 },
         { x: 200, y: 150, width: 50, height: 50 },
         { x: 150, y: 300, width: 50, height: 50 }
-      ]
+      ],
+      mouseX: 0,
+      mouseY: 0,
+      shoot: false // To trigger shooting
     }
   },
   methods: {
@@ -48,20 +60,30 @@ export default {
         top: `${obstacle.y}px`,
         width: `${obstacle.width}px`,
         height: `${obstacle.height}px`
-        // backgroundColor: 'rgba(255, 0, 0, 0.5)'
       }
+    },
+    updateCursorPosition(event) {
+      this.mouseX = event.clientX
+      this.mouseY = event.clientY
+    },
+    handleMouseClick() {
+      this.shoot = true // Trigger the shoot action
+      this.$nextTick(() => {
+        this.shoot = false // Reset after triggering
+      })
     }
   }
 }
 </script>
 
 <style>
-/* #app {
+#app {
   position: relative;
   width: 100%;
   height: 96vh;
   overflow: hidden;
-} */
+  cursor: crosshair; 
+}
 
 /* Background styling */
 .background {
