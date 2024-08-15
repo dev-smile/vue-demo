@@ -6,8 +6,9 @@ import { RouterView, RouterLink } from "vue-router";
   <header>
     <div class="wrapper">
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">공 튕기기</RouterLink>
+        <RouterLink to="/about">장애물 피하기</RouterLink>
+        <RouterLink to="/sprite">캐릭터</RouterLink>
       </nav>
     </div>
   </header>
@@ -15,7 +16,20 @@ import { RouterView, RouterLink } from "vue-router";
 </template>
 
 <style scoped>
-header {
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0 1rem;
+  border-left: 1px solid var(--color-border);
+}
+/* header {
   line-height: 1.5;
   max-height: 100vh;
 }
@@ -66,5 +80,5 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
-}
+} */
 </style>
