@@ -9,6 +9,7 @@ import { RouterView, RouterLink } from "vue-router";
         <RouterLink to="/">공 튕기기</RouterLink>
         <RouterLink to="/about">장애물 피하기</RouterLink>
         <RouterLink to="/sprite">캐릭터</RouterLink>
+        <RouterLink to="/note">음표 맞추기</RouterLink>
       </nav>
     </div>
   </header>
